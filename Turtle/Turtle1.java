@@ -1,5 +1,8 @@
 import java.util.Scanner;
-
+/*
+ 1- Dibuixa el següent gràfic. Paràmetres: Nombre de quadres en horitzontal, nombre de quadres en
+vertical i longitud de costat.
+ */
 public class Turtle1 {
     public static void main(String[] args) {
         Scanner sc =new Scanner(System.in);

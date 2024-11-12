@@ -1,5 +1,8 @@
 import java.util.Scanner;
-
+/*
+ 5- Dibuixa el següent gràfic. Paràmetres: nombre de quadres concèntrics i longitud inicial del
+quadre.
+ */
 public class turtle5 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

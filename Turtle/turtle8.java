@@ -1,3 +1,7 @@
+/*
+ 8- Dibuixa el següent gràfic.
+ */
+
 public class turtle8{
     public static void main(String[] args) {
         Turtle t = new Turtle(500, 500);

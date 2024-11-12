@@ -1,36 +1,40 @@
 import java.util.Scanner;
-
+/*
+ * 7- Dibuixa el següent gràfic. Paràmetres: nombre de fulles.
+ */
 public class turtle7 {
+    static Turtle t = new Turtle(800, 600);
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Introduce el número de pétalos: ");
-        int numPetalos = sc.nextInt(); 
-        Turtle t = new Turtle(500, 500);
-        t.goTo(0, 0);  
-        Flor(t, numPetalos);
-        t.show();
+        System.out.println("Cuantos petalos tendra tu flor?");
+        int petalo = sc.nextInt();
+
+        double grados = 360d / ( double)petalo;
+
+        for (int i = 0; i < petalo; i++) {
+            petalo(i*grados);
+        }
         sc.close();
+        t.show();
+    }
+    private static void petalo(double grados) {
+        t.goTo(0,0);
+        t.resetAngle();
+        t.turnRight((int) grados);
+        mediopetalo(t, true);
+        t.goTo(0,0);
+        t.resetAngle();
+        t.turnRight((int) grados);
+        t.turnRight(72);
+        mediopetalo(t, false);
     }
 
-    public static void Flor(Turtle t, int numPetalos) {
-        int longitud = 200; 
-        int angulo = 360 / numPetalos; 
-        for (int i = 0; i < numPetalos; i++) {
-            Petalo(t, longitud);
-            t.turnRight(angulo);
+    public static void mediopetalo (Turtle t, boolean dreta) {
+        for (int i = 0; i < 25; i++) {
+            t.forward(9);
+            if (!dreta) t.turnLeft(3);
+            else t.turnRight(3);
         }
-    }
-
-    public static void Petalo(Turtle t, int Petalo) {
-        for (int i = 0; i < 30; i++) {  
-            t.forward(Petalo / 30); 
-            t.turnRight(3);  
-        }
-        t.turnRight(120); 
-        for (int i = 0; i < 30; i++) {
-            t.forward(Petalo / 30);  
-            t.turnRight(3);  
-        }
-        t.turnRight(120);  
     }
 }

@@ -1,4 +1,7 @@
 public class turtle4 {
+    /*
+     4- Dibuixa el següent gràfic. Paràmetres: número de «fulles», longitud de la fulla.
+     */
     public static void main(String[] args) {
         Turtle t = new Turtle(500, 500);
 
