@@ -2,30 +2,42 @@ import java.util.Scanner;
 
 public class cabeceras {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        boolean repetir = true;
+        byte[] bytes = null;
 
-        System.out.println("Ingrese la cabecera IP (en formato binario o hexadecimal): ");
-        String inputHeader = scanner.nextLine();
+        while (repetir) {
+            System.out.println("Ingrese la cabecera IP (en formato binario o hexadecimal): ");
+            String inputHeader = sc.nextLine().trim();
 
-        if (inputHeader.matches("[01]+")) {
-            inputHeader = binarioAHexadecimal(inputHeader);
-            System.out.println("Entrada en formato binario convertida a hexadecimal: " + inputHeader);
-        } else if (!inputHeader.matches("[0-9a-fA-F]+")) {
-            System.out.println("Formato no válido. Asegúrese de que la entrada sea binaria o hexadecimal.");
-            return;
+            if (inputHeader.matches("[01]+")) {
+                if (inputHeader.length() % 4 != 0) {
+                    System.out.println("Error: La longitud del binario debe ser múltiplo de 4.");
+                    continue;
+                }
+                inputHeader = binarioAHexadecimal(inputHeader);
+                System.out.println("Entrada en formato binario convertida a hexadecimal: " + inputHeader);
+            } else if (!inputHeader.matches("[0-9a-fA-F]+")) {
+                System.out.println("Formato no válido. Asegúrese de que la entrada sea binaria o hexadecimal.");
+                continue;
+            }
+
+            if (inputHeader.length() % 2 != 0) {
+                System.out.println("Error: La cabecera IP debe tener una cantidad par de caracteres hexadecimales.");
+                continue;
+            }
+
+            bytes = hexStringToByteArray(inputHeader);
+
+            if (bytes.length < 20) {
+                System.out.println("Error: La cabecera IP es demasiado corta para ser válida (mínimo 20 bytes).");
+                continue;
+            }
+
+            repetir = false;
         }
 
-        if (inputHeader.length() % 2 != 0) {
-            System.out.println("Cabecera IP no válida. Asegúrese de que esté en formato hexadecimal.");
-            return;
-        }
-
-        byte[] bytes = hexStringToByteArray(inputHeader);
-
-        if (bytes.length < 20) {
-            System.out.println("La cabecera IP es demasiado corta para ser válida.");
-            return;
-        }
+        sc.close();
 
         mostrarVersion(bytes);
         mostrarLongitudCabecera(bytes);
