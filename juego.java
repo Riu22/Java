@@ -6,6 +6,7 @@ class Jugador {
     private int ATK;
     private int DEF;
     private int VATK;
+    private int LVL;
 
     public Jugador(String clase) {
         this.clase = clase.toLowerCase();
@@ -18,30 +19,35 @@ class Jugador {
                 ATK = 150;
                 DEF = 100;
                 VATK = 50;
+                LVL = 0;
                 break;
             case "caballero":
                 vida = 180;
                 ATK = 100;
                 DEF = 120;
                 VATK = 60;
+                LVL = 0;
                 break;
             case "mago":
                 vida = 120;
                 ATK = 120;
                 DEF = 80;
                 VATK = 80;
+                LVL = 0;
                 break;
             case "asesino":
                 vida = 150;
                 ATK = 130;
                 DEF = 70;
                 VATK = 100;
+                LVL = 0;
                 break;
             default:
                 vida = 0;
                 ATK = 0;
                 DEF = 0;
                 VATK = 0;
+                LVL = 0;
                 break;
         }
     }
