@@ -8,7 +8,7 @@ class Jugador {
     private int VATK;
 
     public Jugador(String clase) {
-        this.clase = clase;
+        this.clase = clase.toLowerCase();
         inicializarAtributos();
     }
     private void inicializarAtributos() {
