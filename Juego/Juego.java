@@ -25,7 +25,7 @@ public class Juego {
 
         boolean seguirJugando = true;
         while (seguirJugando) {
-            Enemigo enemigo = crearEnemigoDeMismaClase(clase, jugador);
+            Enemigo enemigo = crearEnemigoContrincante(jugador);
             System.out.println("\n👹 ¡Un " + enemigo.getClase() + " enemigo ha aparecido!");
             enemigo.mostrarAtributos();
 
@@ -59,15 +59,81 @@ public class Juego {
         }
         sc.close();
     }
+    public static Enemigo crearEnemigoContrincante(Jugador jugador) {
+        String claseJugador = jugador.getClase();
+        String claseEnemigo = "";
 
-    public static Enemigo crearEnemigoDeMismaClase(String clase, Jugador jugador) {
-        int vida = jugador.getVida();
-        int ATK = jugador.getATK();
-        int DEF = jugador.getDEF();
-        int VATK = jugador.getVATK();
-        int LVL = jugador.getLVL();
+        int vidaJugador = jugador.getVida();
+        int ATKJugador = jugador.getATK();
+        int DEFJugador = jugador.getDEF();
+        int VATKJugador = jugador.getVATK();
+
+        switch (claseJugador) {
+            case "dragon":
+                claseEnemigo = "asesino";
+                break;
+            case "caballero":
+                claseEnemigo = "mago";
+                break;
+            case "mago":
+                claseEnemigo = "dragon";
+                break;
+            case "asesino":
+                claseEnemigo = "caballero";
+                break;
+            default:
+                claseEnemigo = "mago";
+                break;
+        }
+
+        return crearEnemigoDeClase(claseEnemigo, vidaJugador, ATKJugador, DEFJugador, VATKJugador);
+    }
+
+    public static Enemigo crearEnemigoDeClase(String clase, int vidaJugador, int ATKJugador, int DEFJugador, int VATKJugador) {
+        int vida = vidaJugador;
+        int ATK = ATKJugador;
+        int DEF = DEFJugador;
+        int VATK = VATKJugador;
+        int LVL = 1;
+
+        switch (clase) {
+            case "dragon":
+                vida += 80;    // Aumento de vida
+                ATK += 40;     // Aumento de ataque físico
+                DEF += 30;     // Aumento de defensa
+                VATK += 10;    // Aumento de velocidad de ataque
+                break;
+            case "caballero":
+                vida += 60;    // Aumento de vida
+                ATK += 20;     // Aumento de ataque físico
+                DEF += 50;     // Aumento de defensa
+                VATK += 10;    // Aumento de velocidad de ataque
+                break;
+            case "mago":
+                vida += 20;    // Aumento de vida
+                ATK += 30;     // Aumento de ataque físico
+                DEF += 10;     // Aumento de defensa
+                VATK += 20;    // Aumento de velocidad de ataque
+                break;
+            case "asesino":
+                vida += 30;    // Aumento de vida
+                ATK += 30;     // Aumento de ataque físico
+                DEF += 20;     // Aumento de defensa
+                VATK += 60;    // Aumento de velocidad de ataque
+                break;
+            default:
+                // En caso de clase no válida, asignamos valores por defecto
+                vida += 10;
+                ATK += 10;
+                DEF += 10;
+                VATK += 10;
+                break;
+        }
+
+        // Crear y retornar el enemigo con los atributos ajustados
         return new Enemigo(clase, vida, ATK, DEF, VATK, LVL);
     }
+
 
     private static void jugadorTurno(Scanner sc, Jugador jugador, Enemigo enemigo) {
         System.out.println("\n⚔️ ¿Qué quieres hacer?");
