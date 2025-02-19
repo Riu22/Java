@@ -45,7 +45,7 @@ public class Juego {
 
             if (jugador.getVida() > 0) {
                 System.out.println("\n🎉 ¡Has derrotado al enemigo!");
-                jugador.ganarExperiencia(20); // Puntos que gana por victoria
+                jugador.ganarExperiencia(30); // Puntos que gana por victoria
                 jugador.mostrarAtributos();
                 System.out.println("¿Quieres seguir luchando? (si/no)");
                 String respuesta = sc.next();

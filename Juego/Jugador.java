@@ -75,21 +75,42 @@ public class Jugador {
         this.vida += 30;
         this.ATK += 10;
         this.DEF += 5;
+
+        // Restablecer la vida al nuevo valor máximo
+        int vidaMaxima = 0;
+        switch (clase) {
+            case "dragon":
+                vidaMaxima = 200 + (30 * (LVL - 1)); // Incrementa según el nivel
+                break;
+            case "caballero":
+                vidaMaxima = 180 + (30 * (LVL - 1));
+                break;
+            case "mago":
+                vidaMaxima = 120 + (30 * (LVL - 1));
+                break;
+            case "asesino":
+                vidaMaxima = 150 + (30 * (LVL - 1));
+                break;
+        }
+
+        this.vida = vidaMaxima;
         System.out.println("\n🔥 ¡Has subido de nivel! Ahora eres nivel " + LVL);
     }
+
 
     private int subir = 10;
 
     public void ganarExperiencia(int cantidad) {
         experiencia += cantidad;
         System.out.println("\n🎯 ¡Ganaste " + cantidad + " de experiencia!");
-
-        if (experiencia >= subir) {
-            experiencia = 0;
-            subirNivel();
-            mejorarAtributo();
-            subir *= 2;
-        }
+        do {
+            if (experiencia >= subir) {
+                experiencia -= subir;
+                subirNivel();
+                mejorarAtributo();
+                subir *= 2;
+            }
+        }while (experiencia >= subir);
     }
 
     public void habilidadEspecial(Enemigo enemigo) {
