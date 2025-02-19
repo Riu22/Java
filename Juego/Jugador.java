@@ -1,6 +1,7 @@
 package Juego;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Jugador {
     private String clase;
@@ -10,7 +11,7 @@ public class Jugador {
     private int VATK;
     private int LVL;
     private boolean defensaActiva = false;
-    private int experiencia = 0;  // Nueva variable para la experiencia
+    private int experiencia = 0;
 
     public Jugador(String clase) {
         this.clase = clase.toLowerCase();
@@ -61,8 +62,8 @@ public class Jugador {
 
     public void recibirDano(int dano) {
         if (defensaActiva) {
-            dano /= 2;  // Reducir el daño a la mitad si está en modo defensa
-            defensaActiva = false;  // Desactivar defensa tras recibir daño
+            dano /= 2;
+            defensaActiva = false;
         }
 
         this.vida -= dano;
@@ -77,13 +78,17 @@ public class Jugador {
         System.out.println("\n🔥 ¡Has subido de nivel! Ahora eres nivel " + LVL);
     }
 
+    private int subir = 10;
+
     public void ganarExperiencia(int cantidad) {
         experiencia += cantidad;
         System.out.println("\n🎯 ¡Ganaste " + cantidad + " de experiencia!");
 
-        if (experiencia >= 100) {  // Umbral de experiencia para subir de nivel
-            experiencia = 0;  // Reiniciar experiencia
+        if (experiencia >= subir) {
+            experiencia = 0;
             subirNivel();
+            mejorarAtributo();
+            subir *= 2;
         }
     }
 
@@ -105,48 +110,64 @@ public class Jugador {
         }
     }
 
-    public int getATK(){
-        return this.ATK;
-    }
-    public int getVida() {
-        return this.vida;
-    }
+    public void mejorarAtributo() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\n✨ ¡Puedes mejorar un atributo!");
+        System.out.println("1. Aumentar Vida (+20)");
+        System.out.println("2. Aumentar Ataque (+10)");
+        System.out.println("3. Aumentar Defensa (+5)");
+        System.out.println("4. Aumentar Velocidad de Ataque (+5)");
 
-    public int getDEF() {
-        return this.DEF;
-    }
+        int opcion = 0;
+        while (opcion < 1 || opcion > 4) {
+            try {
+                System.out.print("Elige una opción: ");
+                opcion = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("❌ Entrada no válida. Ingresa un número del 1 al 4.");
+                sc.nextLine();
+            }
+        }
 
-    public int getVATK() {
-        return this.VATK;
-    }
-
-    public int getLVL() {
-        return this.LVL;
-    }
-
-    public String getClase() {
-        return this.clase;
+        switch (opcion) {
+            case 1:
+                vida += 20;
+                System.out.println("💖 Has aumentado tu Vida.");
+                break;
+            case 2:
+                ATK += 10;
+                System.out.println("⚔️ Has aumentado tu Ataque.");
+                break;
+            case 3:
+                DEF += 5;
+                System.out.println("🛡️ Has aumentado tu Defensa.");
+                break;
+            case 4:
+                VATK += 5;
+                System.out.println("⚡ Has aumentado tu Velocidad de Ataque.");
+                break;
+        }
     }
 
     public void mostrarClase() {
-            switch (clase) {
-                case "dragon":
-                    dragonGrafics();
-                    System.out.println("¡Has elegido ser un poderoso dragón! 🐉");
-                    break;
-                case "caballero":
-                    caballeroGrafics();
-                    System.out.println("¡Has elegido ser un valiente caballero! ⚔️");
-                    break;
-                case "mago":
-                    magoGrafics();
-                    System.out.println("¡Has elegido ser un sabio mago! 🔮");
-                    break;
-                case "asesino":
-                    asesinoGrafics();
-                    System.out.println("¡Has elegido ser un sigiloso asesino! 🗡️");
-                    break;
-            }
+        switch (clase) {
+            case "dragon":
+                dragonGrafics();
+                System.out.println("¡Has elegido ser un poderoso dragón! 🐉");
+                break;
+            case "caballero":
+                caballeroGrafics();
+                System.out.println("¡Has elegido ser un valiente caballero! ⚔️");
+                break;
+            case "mago":
+                magoGrafics();
+                System.out.println("¡Has elegido ser un sabio mago! 🔮");
+                break;
+            case "asesino":
+                asesinoGrafics();
+                System.out.println("¡Has elegido ser un sigiloso asesino! 🗡️");
+                break;
+        }
     }
 
     private void caballeroGrafics() {
@@ -206,5 +227,30 @@ public class Jugador {
                 "       /| |  \n" +
                 "      / | |  \n" +
                 "     (_| |_)  \n");
+    }
+
+    // Métodos Getters
+    public int getATK() {
+        return this.ATK;
+    }
+
+    public int getVida() {
+        return this.vida;
+    }
+
+    public int getDEF() {
+        return this.DEF;
+    }
+
+    public int getVATK() {
+        return this.VATK;
+    }
+
+    public int getLVL() {
+        return this.LVL;
+    }
+
+    public String getClase() {
+        return this.clase;
     }
 }

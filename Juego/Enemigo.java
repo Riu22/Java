@@ -1,5 +1,7 @@
 package Juego;
 
+import java.util.Random;
+
 public class Enemigo {
     private String clase;
     private int vida;
@@ -17,24 +19,35 @@ public class Enemigo {
         this.LVL = LVL;
     }
 
+    public void mejorarAtributos(int nivelJugador) {
+        double factorCrecimiento = 1 + (nivelJugador * 0.1); // Crecimiento progresivo
+        this.vida = (int) (this.vida * factorCrecimiento);
+        this.ATK = (int) (this.ATK * factorCrecimiento);
+        this.DEF = (int) (this.DEF * (factorCrecimiento - 0.05));
+        this.VATK = (int) (this.VATK * (factorCrecimiento - 0.02));
+        this.LVL = nivelJugador;
+        System.out.println("⚠️ Un nuevo enemigo ha aparecido con más fuerza debido a tu progreso!");
+    }
+
     public void mostrarAtributos() {
-        System.out.println("\n👹 Atributos del enemigo (" + clase + "):");
-        System.out.println("💖 Vida: " + vida);
+        System.out.println("\n\uD83D\uDC79 Atributos del enemigo (" + clase + "):");
+        System.out.println("\uD83D\uDC96 Vida: " + vida);
         System.out.println("⚔️ Ataque: " + ATK);
-        System.out.println("🛡️ Defensa: " + DEF);
+        System.out.println("\uD83D\uDEE1️ Defensa: " + DEF);
         System.out.println("⚡ Velocidad de ataque: " + VATK);
+        System.out.println("⭐ Nivel: " + LVL);
     }
 
     public void atacar(Jugador jugador) {
         int dano = this.ATK - jugador.getDEF();
         if (dano < 0) dano = 5;  // Asegurar que al menos hace algo de daño
         jugador.recibirDano(dano);
-        System.out.println("\n💀 ¡El enemigo te atacó con " + dano + " de daño!");
+        System.out.println("\n\uD83D\uDC80 ¡El enemigo te atacó con " + dano + " de daño!");
     }
 
     public void recibirDano(int dano) {
         this.vida -= dano;
-        System.out.println("\n🩸 El " + clase + " ha recibido " + dano + " de daño. Vida restante: " + this.vida);
+        System.out.println("\n\uD83E\uDE78 El " + clase + " ha recibido " + dano + " de daño. Vida restante: " + this.vida);
     }
 
     public int getVida() {
