@@ -12,8 +12,8 @@ public class Historia {
 
         // 🔥 Primer combate (derrota asegurada)
         System.out.println("\n⚔️ Un Caballero Caído aparece ante ti...");
-        Enemigo caballeroCaido = getEnemigoAleatorio(100);  // El enemigo ahora tiene clase aleatoria
-        caballeroCaido.aumentarAtributos(200, 50, 30, 20); // Hacemos al enemigo muy fuerte para asegurar la derrota.
+        Enemigo caballeroCaido = getEnemigoAleatorio(100);
+        caballeroCaido.aumentarAtributos(200, 50, 30, 20); // Atributos del enemigo complicado
 
         System.out.println("\n💀 En tu estado actual, no tienes oportunidad...");
         batallaDerrota(jugador, caballeroCaido);
