@@ -26,8 +26,8 @@ public class Historia {
         System.out.println("\"Si realmente deseas luchar, necesitarás más poder. Encuentra la llama olvidada, solo ella podrá restaurar tu fuerza.\"");
         System.out.println("El anciano te entrega un medallón. \"Este será tu guía en el camino, pero debes ser sabio con tus elecciones...\"");
         System.out.println("\n🔥 ¡Has obtenido un aumento de poder!");
-        jugador.ganarExperiencia(100); // El jugador gana experiencia para fortalecerse.
-        jugador.setvida(jugador.getVida() + 50); // Recupera 50 de vida
+        jugador.ganarExperiencia(100);
+        jugador.setvida(jugador.getVida() + 50);
         System.out.println("\n💖 El medallón brilla y un poder oculto te sana. Has recuperado algo de vida.");
 
         // ⚔️ Segundo combate
