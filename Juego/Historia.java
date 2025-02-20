@@ -11,12 +11,12 @@ public class Historia {
         System.out.println("Una voz susurra: \"Solo los dignos recuerdan su propósito...\"\n");
 
         // 🔥 Primer combate (derrota asegurada)
-        System.out.println("\n⚔️ Un Caballero Caído aparece ante ti...");
-        Enemigo caballeroCaido = getEnemigoAleatorio(100);
-        caballeroCaido.aumentarAtributos(200, 50, 30, 20); // Atributos del enemigo complicado
+        System.out.println("\n⚔️ Pere Negre(El profesor de programación) aparece ante ti...");
+        Enemigo Pere_Negre = getEnemigoAleatorio(100);
+        Pere_Negre.aumentarAtributos(200, 50, 30, 20); // Atributos del enemigo complicado
 
         System.out.println("\n💀 En tu estado actual, no tienes oportunidad...");
-        batallaDerrota(jugador, caballeroCaido);
+        batallaDerrota(jugador, Pere_Negre);
 
         // 📖 Narrativa después de perder
         System.out.println("\n🌙 Oscuridad... Sientes que caes en un abismo sin fin.");
