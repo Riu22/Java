@@ -18,6 +18,12 @@ public class Enemigo {
         this.VATK = VATK;
         this.LVL = LVL;
     }
+    public void aumentarAtributos(int vidaExtra, int ataqueExtra, int defensaExtra, int velocidadExtra) {
+        this.vida += vidaExtra;
+        this.ATK += ataqueExtra;
+        this.DEF += defensaExtra;
+        this.VATK += velocidadExtra;
+    }
 
     public void mejorarAtributos(int nivelJugador) {
         double factorCrecimiento = 1 + (nivelJugador * 0.1); // Crecimiento progresivo

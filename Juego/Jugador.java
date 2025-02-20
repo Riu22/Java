@@ -13,6 +13,10 @@ public class Jugador {
     private boolean defensaActiva = false;
     private int experiencia = 0;
 
+    public void setvida(int vida) {
+        this.vida = vida;
+    }
+
     public Jugador(String clase) {
         this.clase = clase.toLowerCase();
         inicializarAtributos();
