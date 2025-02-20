@@ -134,9 +134,6 @@ public class Historia {
         return enemigo;
     }
 
-
-
-
     // 📜 Método para obtener la opción del jugador en decisiones
     private static int obtenerOpcion(Scanner sc) {
         int opcion = 0;
