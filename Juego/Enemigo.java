@@ -75,4 +75,29 @@ public class Enemigo {
     public String getClase() {
         return this.clase;
     }
+
+
+    public static class  Asesino extends Enemigo {
+        public Asesino(int nivel) {
+            super("Asesino", 150, 130, 70, 100, nivel);  // Se inicializan con atributos específicos de Asesino
+        }
+    }
+
+    public static class Mago extends Enemigo {
+        public Mago(int nivel) {
+            super("Mago", 120, 120, 80, 80, nivel);  // Se inicializan con atributos específicos de Mago
+        }
+    }
+
+    public static class Dragon extends Enemigo {
+        public Dragon(int nivel) {
+            super("Dragon", 200, 150, 100, 50, nivel);  // Se inicializan con atributos específicos de Dragón
+        }
+    }
+
+    public static class Caballero extends Enemigo {
+        public Caballero(int nivel) {
+            super("Caballero", 180, 100, 120, 60, nivel);  // Se inicializan con atributos específicos de Caballero
+        }
+    }
 }

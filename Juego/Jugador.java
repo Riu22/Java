@@ -225,19 +225,62 @@ public class Jugador {
     }
 
     private void caballeroGrafics() {
-        // ASCII art for Caballero
+        System.out.println(
+                "                /'\n" +
+                        "                ||\n" +
+                        "                ||      ** *\n" +
+                        "                ||      __X_\n" +
+                        "                ||     ( ___\\\n" +
+                        "     ||     |:  \\\\\n" +
+                        "    ><><  ___)..:/_#__,\n" +
+                        "                (X|) (|+(____)+\\ _)\n" +
+                        "        o|_\\/>> + + + << \\\n" +
+                        "       |:\\/|+ + + +| \\_\\<\n" +
+                        "       \\./  XXXXXX.  (o_)_\n" +
+                        "                /+ + + |   \\:|\n" +
+                        "          /+ +/+ +|  -/->>>----.\n" +
+                        "         /+ +|+ /XX /   _--,  _ \\\n" +
+                        "        \\+ + + /  |X   (,\\- \\/_ ,\n" +
+                        "        /\\+ + /\\  |X \\    /,//_/\n" +
+                        "        +_+_+_( )o_)X  \\  (( ///\n" +
+                        "                (_o(  /__/ X   \\  \\\\\n" +
+                        "         \\_|  |_/  X    \\ ///\n" +
+                        "         \\_| >(_/        \\,/\n" +
+                        "    ,////__o\\ /__////,    V    b'ger"
+        );
     }
 
     private void dragonGrafics() {
-        // ASCII art for Dragon
+        System.out.println("                    /     \\\n" +
+                "                   ((     ))\n" +
+                "               ===  \\\\_v_//  ===\n" +
+                "                 ====)_^_(====\n" +
+                "                 ===/ O O \\===\n" +
+                "                 = | /_ _\\ | =\n" +
+                "                =   \\/_ _\\/   =\n" +
+                "                     \\_ _/\n" +
+                "                     (o_o)\n" +
+                "                      VwV");
     }
 
     private void magoGrafics() {
-        // ASCII art for Mago
+        System.out.println("              _,._      \n" +
+                "  .||,       /_ _\\\\     \n" +
+                " \\.`',/      |'L'| |    \n" +
+                " = ,. =      | -,| L    \n" +
+                " / || \\    ,-'\\\"/,'`.   \n" +
+                "   ||     ,'   `,,. `.  \n" +
+                "   ,|____,' , ,;' \\| |  \n" +
+                "  (3|\\    _/|/'   _| |  \n");
     }
 
     private void asesinoGrafics() {
-        // ASCII art for Asesino
+        System.out.println("        (\\_/)  \n" +
+                "        (o.o)\uD83D\uDD2A  \n" +
+                "        (> \uD83C\uDFF9  \n" +
+                "       /| |  \n" +
+                "      / | |  \n" +
+                "     (_| |_)  \n");
     }
 
     // Métodos Getters
