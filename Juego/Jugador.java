@@ -11,6 +11,8 @@ public class Jugador {
     private int VATK;
     private int LVL;
     private boolean defensaActiva = false;
+    private boolean bloqueoActivo = false;
+    private final double CRITICO = 0.2;
     private int experiencia = 0;
 
     public void setvida(int vida) {
@@ -51,28 +53,56 @@ public class Jugador {
         System.out.println("⭐ Nivel: " + LVL);
     }
 
+    // Método para atacar
     public void atacar(Enemigo enemigo) {
         int dano = this.ATK - enemigo.getDEF();
-        if (dano < 0) dano = 5;  // Asegurar que al menos hace algo de daño
+
+        // Si el daño calculado es negativo, se asigna un valor mínimo
+        if (dano < 0) dano = 5;
+
+        // Verificamos si es un golpe crítico (20% de probabilidad)
+        if (Math.random() < CRITICO) {
+            dano *= 2;
+            System.out.println("\n⚡ ¡Golpe Crítico! El daño se ha duplicado.");
+        }
+
+        // Aplicar daño al enemigo
         enemigo.recibirDano(dano);
         System.out.println("\n⚔️ ¡Atacaste al enemigo y le hiciste " + dano + " de daño!");
     }
 
+    // Método para defender (aumenta la defensa)
     public void defender() {
         this.DEF += 15;  // Aumentar defensa
         this.defensaActiva = true;  // Reducir daño en el siguiente turno
         System.out.println("\n🛡️ ¡Has aumentado tu defensa! Reducirás el daño del próximo ataque enemigo.");
     }
 
+    // Método para bloquear todo el daño del próximo ataque (bloqueo completo)
+    public void bloquear() {
+        this.bloqueoActivo = true;
+        System.out.println("\n🛡️ ¡Te has preparado para bloquear el próximo ataque completamente!");
+    }
+
     public void recibirDano(int dano) {
-        if (defensaActiva) {
+        if (bloqueoActivo) {
+            System.out.println("\n🛡️ ¡Has bloqueado todo el daño del ataque!");
+            dano = 0;  // Bloqueamos todo el daño
+            bloqueoActivo = false;
+        } else if (defensaActiva) {
             dano /= 2;
             defensaActiva = false;
         }
 
         this.vida -= dano;
+
+        if (this.vida < 0) {
+            this.vida = 0;
+        }
+
         System.out.println("\n💥 ¡Recibiste " + dano + " de daño! Vida restante: " + this.vida);
     }
+
 
     public void subirNivel() {
         this.LVL++;
@@ -80,7 +110,7 @@ public class Jugador {
         this.ATK += 10;
         this.DEF += 5;
 
-        // Restablecer la vida al nuevo valor máximo
+        // Restablecer la vida al nuevo valor máximo basado en la clase y nivel
         int vidaMaxima = 0;
         switch (clase) {
             case "dragon":
@@ -100,7 +130,6 @@ public class Jugador {
         this.vida = vidaMaxima;
         System.out.println("\n🔥 ¡Has subido de nivel! Ahora eres nivel " + LVL);
     }
-
 
     private int subir = 10;
 
@@ -196,62 +225,19 @@ public class Jugador {
     }
 
     private void caballeroGrafics() {
-        System.out.println(
-                "                /'\n" +
-                        "                ||\n" +
-                        "                ||      ** *\n" +
-                        "                ||      __X_\n" +
-                        "                ||     ( ___\\\n" +
-                        "     ||     |:  \\\\\n" +
-                        "    ><><  ___)..:/_#__,\n" +
-                        "                (X|) (|+(____)+\\ _)\n" +
-                        "        o|_\\/>> + + + << \\\n" +
-                        "       |:\\/|+ + + +| \\_\\<\n" +
-                        "       \\./  XXXXXX.  (o_)_\n" +
-                        "                /+ + + |   \\:|\n" +
-                        "          /+ +/+ +|  -/->>>----.\n" +
-                        "         /+ +|+ /XX /   _--,  _ \\\n" +
-                        "        \\+ + + /  |X   (,\\- \\/_ ,\n" +
-                        "        /\\+ + /\\  |X \\    /,//_/\n" +
-                        "        +_+_+_( )o_)X  \\  (( ///\n" +
-                        "                (_o(  /__/ X   \\  \\\\\n" +
-                        "         \\_|  |_/  X    \\ ///\n" +
-                        "         \\_| >(_/        \\,/\n" +
-                        "    ,////__o\\ /__////,    V    b'ger"
-        );
+        // ASCII art for Caballero
     }
 
     private void dragonGrafics() {
-        System.out.println("                    /     \\\n" +
-                "                   ((     ))\n" +
-                "               ===  \\\\_v_//  ===\n" +
-                "                 ====)_^_(====\n" +
-                "                 ===/ O O \\===\n" +
-                "                 = | /_ _\\ | =\n" +
-                "                =   \\/_ _\\/   =\n" +
-                "                     \\_ _/\n" +
-                "                     (o_o)\n" +
-                "                      VwV");
+        // ASCII art for Dragon
     }
 
     private void magoGrafics() {
-        System.out.println("              _,._      \n" +
-                "  .||,       /_ _\\\\     \n" +
-                " \\.`',/      |'L'| |    \n" +
-                " = ,. =      | -,| L    \n" +
-                " / || \\    ,-'\\\"/,'`.   \n" +
-                "   ||     ,'   `,,. `.  \n" +
-                "   ,|____,' , ,;' \\| |  \n" +
-                "  (3|\\    _/|/'   _| |  \n");
+        // ASCII art for Mago
     }
 
     private void asesinoGrafics() {
-        System.out.println("        (\\_/)  \n" +
-                "        (o.o)\uD83D\uDD2A  \n" +
-                "        (> \uD83C\uDFF9  \n" +
-                "       /| |  \n" +
-                "      / | |  \n" +
-                "     (_| |_)  \n");
+        // ASCII art for Asesino
     }
 
     // Métodos Getters
