@@ -60,6 +60,8 @@ public class Enemigo {
         return this.vida;
     }
 
+    public int getATK(){return this.ATK;}
+
     public int getDEF() {
         return this.DEF;
     }

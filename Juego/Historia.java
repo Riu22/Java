@@ -54,16 +54,30 @@ public class Historia {
         System.out.println("Elige sabiamente.");
 
         int opcion = obtenerOpcion(sc);
+        sc.nextLine(); // Limpia el buffer de entrada si antes usaste nextInt()
+
         if (opcion == 1) {
-            System.out.println("\n💡 Aceptas la prueba de sabiduría del guardián. Tras responder correctamente, te ofrece un nuevo poder.");
-            jugador.ganarExperiencia(50);
-            jugador.setvida(jugador.getVida() + 30); // Incremento de vida
-            System.out.println("\n💖 El guardián te da un elixir que mejora tus habilidades.");
+            System.out.println("\n💡 Aceptas la prueba de sabiduría del guardián.");
+            System.out.println("\nLa pregunta es la siguiente: ¿Cuál es el animal que en la mañana camina en 4 patas,\n" +
+                    "al mediodía en 2 y en la noche con 3?");
+
+            String respuesta = sc.nextLine().trim();
+
+            if (respuesta.equalsIgnoreCase("Humano") || respuesta.equalsIgnoreCase("El Humano") || respuesta.equalsIgnoreCase("el humano")) {
+                jugador.ganarExperiencia(50);
+                jugador.setvida(jugador.getVida() + 30); // Incremento de vida
+                System.out.println("\n💖 El guardián te da un elixir que mejora tus habilidades.");
+            } else {
+                System.out.println("\n❌ Respuesta incorrecta. El guardián te desafía a un combate.");
+                if (!batallaHistoria(jugador, sc, "Artem Rudenko (El Guardián del Bosque)", getEnemigoAleatorio(4))) return;
+                jugador.ganarExperiencia(100);
+            }
         } else {
             System.out.println("\n⚔️ Decides luchar contra el guardián. Tras un arduo combate, lo derrotas.");
-            if (!batallaHistoria(jugador, sc, "Artem Rudenko(El Guardian del bosque)", getEnemigoAleatorio(4))) return;
+            if (!batallaHistoria(jugador, sc, "Artem Rudenko (El Guardián del Bosque)", getEnemigoAleatorio(4))) return;
             jugador.ganarExperiencia(100);
         }
+
 
         // ⚔️ Jefe final
         if (!batallaHistoria(jugador, sc, "Rey Maldito", getEnemigoAleatorio(3))) return;
