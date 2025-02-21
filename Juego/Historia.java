@@ -5,33 +5,44 @@ import java.util.Scanner;
 
 public class Historia {
     public static void jugarModoHistoria(Jugador jugador, Scanner sc) {
-        System.out.println("\n🌑 Un mundo olvidado te espera...");
-        System.out.println("Te despiertas en las ruinas de un reino caído. Ecos de batallas antiguas resuenan en el viento.");
-        System.out.println("El cielo está oscurecido, como si la esperanza misma hubiera abandonado este lugar.");
-        System.out.println("Una voz susurra: \"Solo los dignos recuerdan su propósito...\"\n");
+        try{
+            Thread.sleep(2000);
+            System.out.println("\n🌑 Un mundo olvidado te espera...");
+            System.out.println("Te despiertas en las ruinas de un reino caído. Ecos de batallas antiguas resuenan en el viento.");
+            System.out.println("El cielo está oscurecido, como si la esperanza misma hubiera abandonado este lugar.");
+            System.out.println("Una voz susurra: \"Solo los dignos recuerdan su propósito...\"\n");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         // 🔥 Primer combate (derrota asegurada)
         System.out.println("\n⚔️ Pere Negre(El profesor de programación) aparece ante ti...");
         Enemigo Pere_Negre = getEnemigoAleatorio(100);
-        Pere_Negre.aumentarAtributos(200, 50, 30, 20); // Atributos del enemigo complicado
+        Pere_Negre.aumentarAtributos(200, 50, 30, 20);
 
         System.out.println("\n💀 En tu estado actual, no tienes oportunidad...");
         batallaDerrota(jugador, Pere_Negre);
-
-        // 📖 Narrativa después de perder
-        System.out.println("\n🌙 Oscuridad... Sientes que caes en un abismo sin fin.");
-        System.out.println("...");
-        System.out.println("⛺ Despiertas en una humilde aldea, rodeado de naturaleza. Un anciano te observa desde una silla de madera.");
-        System.out.println("\"Has visto la verdad... El Rey Maldito no permitirá que nadie desafíe su reinado.\"");
-        System.out.println("\"Si realmente deseas luchar, necesitarás más poder. Encuentra la llama olvidada, solo ella podrá restaurar tu fuerza.\"");
-        System.out.println("El anciano te entrega un medallón. \"Este será tu guía en el camino, pero debes ser sabio con tus elecciones...\"");
-        System.out.println("\n🔥 ¡Has obtenido un aumento de poder!");
-        jugador.ganarExperiencia(100);
-        jugador.setvida(jugador.getVida() + 50);
-        System.out.println("\n💖 El medallón brilla y un poder oculto te sana. Has recuperado algo de vida.");
+        try{
+            Thread.sleep(2000);
+            // 📖 Narrativa después de perder
+            System.out.println("\n🌙 Oscuridad... Sientes que caes en un abismo sin fin.");
+            System.out.println("...");
+            System.out.println("⛺ Despiertas en una humilde aldea, rodeado de naturaleza. Un anciano te observa desde una silla de madera.");
+            System.out.println("\"Has visto la verdad... El Rey Maldito no permitirá que nadie desafíe su reinado.\"");
+            System.out.println("\"Si realmente deseas luchar, necesitarás más poder. Encuentra la llama olvidada, solo ella podrá restaurar tu fuerza.\"");
+            System.out.println("El anciano te entrega un medallón. \"Este será tu guía en el camino, pero debes ser sabio con tus elecciones...\"");
+            System.out.println("\n🔥 ¡Has obtenido un aumento de poder!");
+            jugador.ganarExperiencia(100);
+            jugador.setvida(jugador.getVida() + 50);
+            System.out.println("\n💖 El medallón brilla y un poder oculto te sana. Has recuperado algo de vida.");
+            Thread.sleep(4000);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         // ⚔️ Segundo combate
-        if (!batallaHistoria(jugador, sc, "Hechicero del Abismo", getEnemigoAleatorio(2))) return;
+        if (!batallaHistoria(jugador, sc, "Hechicero del Abismo", getEnemigoAleatorio(4))) return;
 
         // 🏞️ Exploración en la búsqueda de la llama olvidada
         System.out.println("\n🌿 Sigues el sendero marcado por el medallón. El bosque se vuelve más oscuro y misterioso.");
@@ -50,6 +61,7 @@ public class Historia {
             System.out.println("\n💖 El guardián te da un elixir que mejora tus habilidades.");
         } else {
             System.out.println("\n⚔️ Decides luchar contra el guardián. Tras un arduo combate, lo derrotas.");
+            if (!batallaHistoria(jugador, sc, "Artem Rudenko(El Guardian del bosque)", getEnemigoAleatorio(4))) return;
             jugador.ganarExperiencia(100);
         }
 
@@ -64,7 +76,7 @@ public class Historia {
 
     // 🔥 Método para el primer combate que el jugador debe perder
     private static void batallaDerrota(Jugador jugador, Enemigo enemigo) {
-        System.out.println("\n⚔️ " + enemigo.getClase() + " es demasiado poderoso...");
+        System.out.println("\n⚔️ El" + enemigo.getClase() + " es demasiado poderoso...");
         System.out.println("Tu corazón late rápidamente. Sabes que este será un combate desigual.");
         while (jugador.getVida() > 0) {
             Juego.jugadorTurno(new Scanner(System.in), jugador, enemigo);
@@ -75,10 +87,15 @@ public class Historia {
                 }
             }
         }
+        try {
+            Thread.sleep(2000);
+            System.out.println("\n💀 Has sido derrotado sin remedio...");
+            System.out.println("Tu cuerpo cae al suelo... y la oscuridad te envuelve.");
+            System.out.println("Sin embargo, antes de perder el conocimiento, ves una luz brillante al horizonte...");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        System.out.println("\n💀 Has sido derrotado sin remedio...");
-        System.out.println("Tu cuerpo cae al suelo... y la oscuridad te envuelve.");
-        System.out.println("Sin embargo, antes de perder el conocimiento, ves una luz brillante al horizonte...");
     }
 
     // 🔄 Método normal para las batallas del modo historia
@@ -107,7 +124,7 @@ public class Historia {
 
     private static Enemigo getEnemigoAleatorio(int nivel) {
         Random rand = new Random();
-        int claseIndex = rand.nextInt(4); // Suponiendo que hay 4 clases diferentes
+        int claseIndex = rand.nextInt(4);
 
         Enemigo enemigo;
 
@@ -129,7 +146,7 @@ public class Historia {
                 break;
         }
 
-        enemigo.mejorarAtributos(nivel); // Mejorar atributos según nivel
+        enemigo.mejorarAtributos(nivel);
 
         return enemigo;
     }
