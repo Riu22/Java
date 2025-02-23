@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Historia {
     public static void jugarModoHistoria(Jugador jugador, Scanner sc) {
-        try{
+        try {
             Thread.sleep(2000);
             System.out.println("\n🌑 Un mundo olvidado te espera...");
             System.out.println("Te despiertas en las ruinas de un reino caído. Ecos de batallas antiguas resuenan en el viento.");
@@ -16,14 +16,14 @@ public class Historia {
             throw new RuntimeException(e);
         }
 
-        // 🔥 Primer combate (derrota asegurada)
-        System.out.println("\n⚔️ Pere Negre(El profesor de programación) aparece ante ti...");
+        // Primer combate (derrota asegurada)
+        System.out.println("\n⚔️ Pere Negre (El profesor de programación) aparece ante ti...");
         Enemigo Pere_Negre = getEnemigoAleatorio(100);
         Pere_Negre.aumentarAtributos(200, 50, 30, 20);
 
         System.out.println("\n💀 En tu estado actual, no tienes oportunidad...");
         batallaDerrota(jugador, Pere_Negre);
-        try{
+        try {
             Thread.sleep(2000);
             // 📖 Narrativa después de perder
             System.out.println("\n🌙 Oscuridad... Sientes que caes en un abismo sin fin.");
@@ -33,7 +33,7 @@ public class Historia {
             System.out.println("\"Si realmente deseas luchar, necesitarás más poder. Encuentra la llama olvidada, solo ella podrá restaurar tu fuerza.\"");
             System.out.println("El anciano te entrega un medallón. \"Este será tu guía en el camino, pero debes ser sabio con tus elecciones...\"");
             System.out.println("\n🔥 ¡Has obtenido un aumento de poder!");
-            jugador.ganarExperiencia(100);
+            jugador.ganarExperiencia(40);
             jugador.setvida(jugador.getVida() + 50);
             System.out.println("\n💖 El medallón brilla y un poder oculto te sana. Has recuperado algo de vida.");
             Thread.sleep(4000);
@@ -41,10 +41,10 @@ public class Historia {
             throw new RuntimeException(e);
         }
 
-        // ⚔️ Segundo combate
+        //  Segundo combate
         if (!batallaHistoria(jugador, sc, "Hechicero del Abismo", getEnemigoAleatorio(4))) return;
 
-        // 🏞️ Exploración en la búsqueda de la llama olvidada
+        //  Exploración en la búsqueda de la llama olvidada
         System.out.println("\n🌿 Sigues el sendero marcado por el medallón. El bosque se vuelve más oscuro y misterioso.");
         System.out.println("Un crujido de ramas te hace voltear. Un extraño ser aparece en tu camino...");
         System.out.println("Es un guardián del bosque que te desafía a una prueba de sabiduría.");
@@ -54,7 +54,7 @@ public class Historia {
         System.out.println("Elige sabiamente.");
 
         int opcion = obtenerOpcion(sc);
-        sc.nextLine(); // Limpia el buffer de entrada si antes usaste nextInt()
+        sc.nextLine();
 
         if (opcion == 1) {
             System.out.println("\n💡 Aceptas la prueba de sabiduría del guardián.");
@@ -65,7 +65,7 @@ public class Historia {
 
             if (respuesta.equalsIgnoreCase("Humano") || respuesta.equalsIgnoreCase("El Humano") || respuesta.equalsIgnoreCase("el humano")) {
                 jugador.ganarExperiencia(50);
-                jugador.setvida(jugador.getVida() + 30); // Incremento de vida
+                jugador.setvida(jugador.getVida() + 30);
                 System.out.println("\n💖 El guardián te da un elixir que mejora tus habilidades.");
             } else {
                 System.out.println("\n❌ Respuesta incorrecta. El guardián te desafía a un combate.");
@@ -78,13 +78,15 @@ public class Historia {
             jugador.ganarExperiencia(100);
         }
 
+        //  enemigo antes del jefe final
+        if (!batallaHistoria(jugador, sc, "Manu Martinez (El de Sistemas)", getEnemigoAleatorio(6))) return;
 
-        // ⚔️ Jefe final
-        if (!batallaHistoria(jugador, sc, "Rey Maldito", getEnemigoAleatorio(3))) return;
+        //  Jefe final
+        if (!batallaHistoria(jugador, sc, "Pere Negre (El profesor de programación)", getEnemigoAleatorio(8))) return;
 
-        // 🎭 Final del juego
-        System.out.println("\n👑 Has vencido al Rey Maldito. Su corona se quiebra y el reino comienza a sanar.");
-        System.out.println("Pero la pregunta permanece: ¿Eres el héroe del renacer... o solo un nuevo tirano?");
+        // Final del juego
+        System.out.println("\n👑 Conseguiste aprobar programacion.Puedes pasar a segundo y no debes de hacer la recuperación");
+        System.out.println("Pero la pregunta permanece: ¿El combate ha acabado?");
         System.out.println("🎭 Fin del modo historia.");
     }
 
@@ -112,7 +114,6 @@ public class Historia {
 
     }
 
-    // 🔄 Método normal para las batallas del modo historia
     private static boolean batallaHistoria(Jugador jugador, Scanner sc, String nombreEnemigo, Enemigo enemigo) {
         System.out.println("\n⚔️ " + nombreEnemigo + " aparece ante ti...");
         enemigo.mostrarAtributos();
@@ -165,7 +166,6 @@ public class Historia {
         return enemigo;
     }
 
-    // 📜 Método para obtener la opción del jugador en decisiones
     private static int obtenerOpcion(Scanner sc) {
         int opcion = 0;
         while (opcion < 1 || opcion > 2) {
@@ -180,3 +180,4 @@ public class Historia {
         return opcion;
     }
 }
+

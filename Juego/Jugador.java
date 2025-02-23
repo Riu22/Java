@@ -57,16 +57,13 @@
         public void atacar(Enemigo enemigo) {
             int dano = this.ATK - enemigo.getDEF();
 
-            // Si el daño calculado es negativo, se asigna un valor mínimo
             if (dano < 0) dano = 5;
 
-            // Verificamos si es un golpe crítico (20% de probabilidad)
             if (Math.random() < CRITICO) {
                 dano *= 2;
                 System.out.println("\n⚡ ¡Golpe Crítico! El daño se ha duplicado.");
             }
 
-            // Aplicar daño al enemigo
             enemigo.recibirDano(dano);
             System.out.println("\n⚔️ ¡Atacaste al enemigo y le hiciste " + dano + " de daño!");
         }
@@ -78,11 +75,6 @@
             System.out.println("\n🛡️ ¡Has aumentado tu defensa! Reducirás el daño del próximo ataque enemigo.");
         }
 
-        // Método para bloquear todo el daño del próximo ataque (bloqueo completo)
-        public void bloquear() {
-            this.bloqueoActivo = true;
-            System.out.println("\n🛡️ ¡Te has preparado para bloquear el próximo ataque completamente!");
-        }
 
         public void recibirDano(int dano) {
             if (bloqueoActivo) {
@@ -110,7 +102,6 @@
             this.ATK += 10;
             this.DEF += 5;
 
-            // Restablecer la vida al nuevo valor máximo basado en la clase y nivel
             int vidaMaxima = 0;
             switch (clase) {
                 case "dragon":
@@ -148,21 +139,44 @@
 
         public void habilidadEspecial(Enemigo enemigo) {
             Random rand = new Random();
-            int danoExtra = rand.nextInt(40) + 20;  // Daño entre 20 y 60
+            int danoExtra = rand.nextInt(40) + 20;
 
-            // Habilidad especial del Mago (Curación o Daño extra)
-            if (clase.equals("mago")) {
-                if (rand.nextBoolean()) {
-                    // Curación
-                    this.vida += 30;
-                    System.out.println("\n🔮 ¡Usaste tu habilidad especial y te curaste 30 de vida! Vida actual: " + this.vida);
-                } else {
-                    // Daño extra
+            switch (clase) {
+                case "mago":
+                    if (rand.nextBoolean()) {
+                        this.vida += 30;
+                        System.out.println("\n🔮 ¡Usaste tu habilidad especial y te curaste 30 de vida! Vida actual: " + this.vida);
+                    } else {
+                        enemigo.recibirDano(danoExtra);
+                        System.out.println("\n🔮 ¡Usaste tu habilidad especial y causaste " + danoExtra + " de daño!");
+                    }
+                    break;
+
+                case "dragon":
                     enemigo.recibirDano(danoExtra);
-                    System.out.println("\n🔮 ¡Usaste tu habilidad especial y causaste " + danoExtra + " de daño!");
-                }
+                    System.out.println("\n🐉 ¡Usaste tu habilidad especial y lanzaste las llamas del infierno, causando " + danoExtra + " de daño !");
+                    break;
+
+                case "asesino":
+                    if (rand.nextDouble() < 0.5) {
+                        danoExtra *= 2;
+                        System.out.println("\n🔪 ¡Ataque furtivo crítico! El daño se ha duplicado.");
+                    }
+                    enemigo.recibirDano(danoExtra);
+                    System.out.println("\n🔪 ¡Usaste tu habilidad especial y realizaste un ataque furtivo, causando " + danoExtra + " de daño!");
+                    break;
+
+                case "caballero":
+                    this.DEF += 20;
+                    System.out.println("\n🛡️ ¡Usaste tu habilidad especial y activaste el Escudo divino, aumentando tu defensa!");
+                    break;
+
+                default:
+                    System.out.println("\n❌ ¡No tienes una habilidad especial asignada!");
+                    break;
             }
         }
+
 
         public void mejorarAtributo() {
             Scanner sc = new Scanner(System.in);
@@ -203,55 +217,48 @@
             }
         }
 
-        public void mostrarClase() {
+        public String mostrarClase() {
             switch (clase) {
                 case "dragon":
-                    dragonGrafics();
-                    System.out.println("¡Has elegido ser un poderoso dragón! 🐉");
-                    break;
+                    return dragonGrafics();
                 case "caballero":
-                    caballeroGrafics();
-                    System.out.println("¡Has elegido ser un valiente caballero! ⚔️");
-                    break;
+                    return caballeroGrafics();
                 case "mago":
-                    magoGrafics();
-                    System.out.println("¡Has elegido ser un sabio mago! 🔮");
-                    break;
+                    return magoGrafics();
                 case "asesino":
-                    asesinoGrafics();
-                    System.out.println("¡Has elegido ser un sigiloso asesino! 🗡️");
-                    break;
+                    return asesinoGrafics();
+                default:
+                    return "";
             }
         }
 
-        private void caballeroGrafics() {
-            System.out.println(
-                    "                /'\n" +
-                            "                ||\n" +
-                            "                ||      ** *\n" +
-                            "                ||      __X_\n" +
-                            "                ||     ( ___\\\n" +
-                            "     ||     |:  \\\\\n" +
-                            "    ><><  ___)..:/_#__,\n" +
-                            "                (X|) (|+(____)+\\ _)\n" +
-                            "        o|_\\/>> + + + << \\\n" +
-                            "       |:\\/|+ + + +| \\_\\<\n" +
-                            "       \\./  XXXXXX.  (o_)_\n" +
-                            "                /+ + + |   \\:|\n" +
-                            "          /+ +/+ +|  -/->>>----.\n" +
-                            "         /+ +|+ /XX /   _--,  _ \\\n" +
-                            "        \\+ + + /  |X   (,\\- \\/_ ,\n" +
-                            "        /\\+ + /\\  |X \\    /,//_/\n" +
-                            "        +_+_+_( )o_)X  \\  (( ///\n" +
-                            "                (_o(  /__/ X   \\  \\\\\n" +
-                            "         \\_|  |_/  X    \\ ///\n" +
-                            "         \\_| >(_/        \\,/\n" +
-                            "    ,////__o\\ /__////,    V    b'ger"
-            );
+
+        public String caballeroGrafics() {
+            return "                /'\n" +
+                    "                ||\n" +
+                    "                ||      ** *\n" +
+                    "                ||      __X_\n" +
+                    "                ||     ( ___\\\n" +
+                    "     ||     |:  \\\\\n" +
+                    "    ><><  ___)..:/_#__,\n" +
+                    "                (X|) (|+(____)+\\ _)\n" +
+                    "        o|_\\/>> + + + << \\\n" +
+                    "       |:\\/|+ + + +| \\_\\<\n" +
+                    "       \\./  XXXXXX.  (o_)_\n" +
+                    "                /+ + + |   \\:|\n" +
+                    "          /+ +/+ +|  -/->>>----.\n" +
+                    "         /+ +|+ /XX /   _--,  _ \\\n" +
+                    "        \\+ + + /  |X   (,\\- \\/_ ,\n" +
+                    "        /\\+ + /\\  |X \\    /,//_/\n" +
+                    "        +_+_+_( )o_)X  \\  (( ///\n" +
+                    "                (_o(  /__/ X   \\  \\\\\n" +
+                    "         \\_|  |_/  X    \\ ///\n" +
+                    "         \\_| >(_/        \\,/\n" +
+                    "    ,////__o\\ /__////,    V    b'ger";
         }
 
-        private void dragonGrafics() {
-            System.out.println("                    /     \\\n" +
+        public String dragonGrafics() {
+            return "                    /     \\\n" +
                     "                   ((     ))\n" +
                     "               ===  \\\\_v_//  ===\n" +
                     "                 ====)_^_(====\n" +
@@ -260,30 +267,29 @@
                     "                =   \\/_ _\\/   =\n" +
                     "                     \\_ _/\n" +
                     "                     (o_o)\n" +
-                    "                      VwV");
+                    "                      VwV";
         }
 
-        private void magoGrafics() {
-            System.out.println("              _,._      \n" +
+        public String magoGrafics() {
+            return "              _,._      \n" +
                     "  .||,       /_ _\\\\     \n" +
                     " \\.`',/      |'L'| |    \n" +
                     " = ,. =      | -,| L    \n" +
                     " / || \\    ,-'\\\"/,'`.   \n" +
                     "   ||     ,'   `,,. `.  \n" +
                     "   ,|____,' , ,;' \\| |  \n" +
-                    "  (3|\\    _/|/'   _| |  \n");
+                    "  (3|\\    _/|/'   _| |  \n";
         }
 
-        private void asesinoGrafics() {
-            System.out.println("        (\\_/)  \n" +
-                    "        (o.o)\uD83D\uDD2A  \n" +
-                    "        (> \uD83C\uDFF9  \n" +
+        public String asesinoGrafics() {
+            return "        (\\_/)  \n" +
+                    "        (o.o)🔪  \n" +
+                    "        (> 🏹  \n" +
                     "       /| |  \n" +
                     "      / | |  \n" +
-                    "     (_| |_)  \n");
+                    "     (_| |_)  \n";
         }
 
-        // Métodos Getters
         public int getATK() {
             return this.ATK;
         }

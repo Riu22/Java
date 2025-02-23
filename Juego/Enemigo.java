@@ -1,7 +1,5 @@
 package Juego;
 
-import java.util.Random;
-
 public class Enemigo {
     private String clase;
     private int vida;
@@ -46,7 +44,7 @@ public class Enemigo {
 
     public void atacar(Jugador jugador) {
         int dano = this.ATK - jugador.getDEF();
-        if (dano < 0) dano = 5;  // Asegurar que al menos hace algo de daño
+        if (dano < 0) dano = 5;
         jugador.recibirDano(dano);
         System.out.println("\n\uD83D\uDC80 ¡El enemigo te atacó con " + dano + " de daño!");
     }
@@ -81,25 +79,40 @@ public class Enemigo {
 
     public static class  Asesino extends Enemigo {
         public Asesino(int nivel) {
-            super("Asesino", 150, 130, 70, 100, nivel);  // Se inicializan con atributos específicos de Asesino
+            super("Asesino", 150, 130, 70, 100, nivel);
         }
     }
 
     public static class Mago extends Enemigo {
         public Mago(int nivel) {
-            super("Mago", 120, 120, 80, 80, nivel);  // Se inicializan con atributos específicos de Mago
+            super("Mago", 120, 120, 80, 80, nivel);
         }
     }
 
     public static class Dragon extends Enemigo {
         public Dragon(int nivel) {
-            super("Dragon", 200, 150, 100, 50, nivel);  // Se inicializan con atributos específicos de Dragón
+            super("Dragon", 200, 150, 100, 50, nivel);
         }
     }
 
     public static class Caballero extends Enemigo {
         public Caballero(int nivel) {
-            super("Caballero", 180, 100, 120, 60, nivel);  // Se inicializan con atributos específicos de Caballero
+            super("Caballero", 180, 100, 120, 60, nivel);
+        }
+    }
+
+    public String mostrar(Jugador jugador) {
+        switch (clase.toLowerCase()) {
+            case "dragon":
+                return jugador.dragonGrafics();
+            case "caballero":
+                return jugador.caballeroGrafics();
+            case "mago":
+                return jugador.magoGrafics();
+            case "asesino":
+                return jugador.asesinoGrafics();
+            default:
+                return ("");
         }
     }
 }
