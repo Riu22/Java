@@ -5,7 +5,7 @@ interface animal{
     void moverse();
 }
 
-class perro implements animal{
+class perro implements animal {
     String nombre;
 
     perro(String nombre){
@@ -20,7 +20,7 @@ class perro implements animal{
 
 }
 
-class gato implements animal{
+class gato implements animal {
     String nombre;
     gato(String nombre){
         this.nombre = nombre;
@@ -34,7 +34,7 @@ class gato implements animal{
 
 }
 
-class pez implements animal{
+class pez implements animal {
 
     String nombre;
     pez(String nombre){
