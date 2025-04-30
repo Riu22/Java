@@ -1,42 +1,46 @@
 package contenidor;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-class animal{}
-class dog extends animal{
+class Animal {}
+
+class Dog extends Animal {
     String name;
-    dog(String name){
+    Dog(String name) {
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "dog{" +
-                "name='" + name + '\'' +
-                '}' ;
+        return "Dog{" +  name + "'}";
     }
 }
 
-class cat extends animal{
+class Cat extends Animal {
     String name;
-    cat(String name){
+    Cat(String name) {
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "cat{" +
-                "name='" + name + '\'' +
-                '}' ;
+        return "Cat{"  + name + "'}";
     }
 }
 
 public class exercici7 {
-
     public static void main(String[] args) {
-        List<animal> lista = new ArrayList<animal>();
-        lista.add(new dog("Bob"));
-        lista.add(new cat("Bab"));
-    }
+        List<Animal> lista = new ArrayList<>();
+        lista.add(new Dog("Bob"));
+        lista.add(new Cat("Bab"));
+        lista.add(new Dog("Max"));
+        lista.add(new Cat("Mia"));
 
+        for (Animal a : lista) {
+            if (a instanceof Dog) {
+                System.out.println("This is a Dog: " + a);
+            } else if (a instanceof Cat) {
+                System.out.println("This is a Cat: " + a);
+            }
+        }
+    }
 }
